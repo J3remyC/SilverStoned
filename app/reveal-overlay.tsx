@@ -4,7 +4,7 @@ const bootstrap = `
 (() => {
   if (
     !matchMedia('(prefers-reduced-motion: no-preference)').matches ||
-    document.hidden || location.hash ||
+    document.hidden || location.pathname !== '/' || location.hash ||
     performance.getEntriesByType('navigation')[0]?.type === 'back_forward'
   ) return;
 

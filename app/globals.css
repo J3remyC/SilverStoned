@@ -19,6 +19,17 @@ body {
   container-type: inline-size;
 }
 
+html[data-menu-open],
+html[data-menu-open].lenis.lenis-stopped {
+  overflow: hidden;
+  overscroll-behavior: none;
+  scrollbar-gutter: auto;
+}
+
+[data-menu-open] .website-content {
+  margin-inline-end: var(--menu-scrollbar, 0px);
+}
+
 .website-reveal {
   display: none;
   position: fixed;
@@ -108,6 +119,11 @@ body {
   scroll-margin-block-start: 24px;
 }
 
+main[id],
+main section[id] {
+  scroll-margin-block-start: 96px;
+}
+
 .skip-link {
   position: fixed;
   z-index: 5;
@@ -145,24 +161,200 @@ body {
   letter-spacing: -0.085em;
 }
 
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 3cqw, 36px);
-  font-size: 14px;
+.site-header {
+  position: sticky;
+  z-index: 4;
+  inset-block-start: 0;
+  background: #fff;
 }
 
-.site-nav a,
 .masthead .wordmark {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
 }
 
-.site-nav a:hover,
+.menu-toggle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  inline-size: 48px;
+  block-size: 48px;
+  margin-inline-end: -8px;
+  cursor: pointer;
+}
+
+.menu-toggle:active {
+  background-color: rgb(127 127 127 / 16%);
+}
+
+.site-menu {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+  color: #f4f4f4;
+}
+
+.site-menu::backdrop {
+  background: transparent;
+}
+
+.site-menu__surface {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--reveal-charcoal);
+}
+
+.site-menu__brand {
+  flex: none;
+}
+
+.site-menu__chrome {
+  position: absolute;
+  z-index: 1;
+  inset: 0 var(--menu-scrollbar, 0px) auto 0;
+  container-type: inline-size;
+  pointer-events: none;
+}
+
+.site-menu__chrome .masthead {
+  justify-content: flex-end;
+}
+
+.menu-toggle--close {
+  background: var(--reveal-charcoal);
+  pointer-events: auto;
+}
+
+.site-menu__layout {
+  display: grid;
+  flex: 1 0 auto;
+  align-items: center;
+  gap: clamp(36px, 7vw, 104px);
+  padding-block: clamp(16px, 5vh, 56px) max(36px, env(safe-area-inset-bottom));
+}
+
+.site-menu__links {
+  border-block-start: 1px solid rgb(255 255 255 / 24%);
+}
+
+.site-menu__links li {
+  border-block-end: 1px solid rgb(255 255 255 / 24%);
+}
+
+.site-menu__links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-block-size: 52px;
+  padding-block: 0.06em 0.11em;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(2.55rem, min(10.8vw, 10vh), 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.site-menu__label {
+  min-inline-size: 0;
+  margin-inline-start: -0.04em;
+  overflow: clip;
+}
+
+.site-menu__label-track {
+  position: relative;
+  display: block;
+}
+
+.site-menu__label-line {
+  display: block;
+  padding-block: 0.07em;
+  padding-inline: 0.04em 0.16em;
+}
+
+.site-menu__label-echo {
+  position: absolute;
+  inset: 100% 0 auto;
+  color: #fff;
+  transform: translateX(0.11em);
+}
+
+.site-menu__arrow {
+  --menu-arrow-visibility: 0;
+  flex: none;
+}
+
+.site-menu__arrow svg {
+  opacity: var(--menu-arrow-visibility);
+}
+
+.site-menu__silver-rule {
+  position: absolute;
+  inset: auto 0 -1px;
+  block-size: 1px;
+  background: #d6d6d6;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.site-menu__links a:is(:focus-visible, :active, [aria-current="page"]) .site-menu__arrow svg {
+  opacity: 1;
+}
+
+.site-menu__links a[aria-current="page"] {
+  color: #fff;
+}
+
+.site-menu__links a:is(:focus-visible, [aria-current="page"]) .site-menu__label-line {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.11em;
+}
+
+.site-menu__image {
+  display: none;
+}
+
+.site-menu-fallback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 14px;
+  font-size: 14px;
+}
+
+.site-menu-fallback a:hover,
 .footer a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) and (any-hover: hover) and (any-pointer: fine) {
+  .menu-toggle:hover:not(:focus-visible) {
+    outline: 1px solid currentColor;
+    outline-offset: -5px;
+  }
+
+  .site-menu__links a:hover .site-menu__arrow svg {
+    opacity: 1;
+  }
+
+  .site-menu__links a:hover .site-menu__label-line {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.11em;
+  }
 }
 
 .hero,
@@ -280,9 +472,92 @@ body {
   font-size: 14px;
 }
 
+.home-order,
+.route-page {
+  padding-block: clamp(48px, 8cqw, 112px);
+}
+
+.home-order {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-block-end: 1px solid var(--line);
+}
+
+.route-page {
+  min-block-size: calc(100svh - 168px);
+}
+
+.route-page h1 {
+  margin-block-end: 24px;
+}
+
+.route-page p {
+  max-inline-size: 52ch;
+  font-size: clamp(1rem, 1.4cqw, 1.125rem);
+  line-height: 1.55;
+}
+
+.route-page .collection-link {
+  margin-block-start: 24px;
+}
+
+.route-split {
+  display: grid;
+  align-items: center;
+  gap: clamp(32px, 6cqw, 88px);
+}
+
+.route-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #121212;
+}
+
+.order-links {
+  max-inline-size: 42rem;
+  margin-block-start: 32px;
+  border-block-start: 1px solid var(--line);
+}
+
+.order-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-block-size: 56px;
+  padding-inline: 8px;
+  border-block-end: 1px solid var(--line);
+}
+
+.order-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 @media (min-width: 900px) {
   .masthead {
     min-height: 84px;
+  }
+
+  .site-menu__layout,
+  .route-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .site-menu__image {
+    position: relative;
+    display: block;
+    aspect-ratio: 1.12;
+    border: 1px solid rgb(255 255 255 / 16%);
+    background: #000;
+  }
+
+  .site-menu__image img {
+    object-position: 55% 50%;
   }
 
   .hero {

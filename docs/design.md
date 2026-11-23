@@ -23,11 +23,12 @@ Use a fluid scale. Start with a 48–120 px hero, a 32–72 px section heading, 
 
 | Section | Layout and purpose |
 | --- | --- |
-| Header | A text wordmark and concise navigation to real sections. Keep the navigation legible against the hero and in any scrolled state. |
+| Header | A text wordmark and shared navigation to the five pages in the [project overview](project%20overview.md). Keep the navigation legible against the hero and in any scrolled state. |
 | Hero | On wide screens, set a left-aligned message and one action beside a large macro photograph. On mobile, keep the message and action together, with a crop composed for the narrower frame. Use “Explore the collection” for the link to the collection. |
 | Featured collection | Use an editorial grid with a larger lead image and supporting pieces. Give each piece a clear view and a verified name. Stack or simplify the grid on mobile so the entire set is reachable without horizontal scrolling. |
 | Material detail | Pair a wide close-up with a short description grounded in the supplied material, finish, or construction details. Use this image as the page's main scroll-led moment. |
-| Final action and footer | Give interested visitors one clear next step. Use the verified store or inquiry destination when supplied and link to available brand channels. |
+| Final action and footer | Direct shoppers to Order Now and link to approved brand contact channels in the footer. |
+| Order Now | Label each external link with its platform name so visitors can choose where to place an order. Use the verified Silver Stoned storefront or page URL. |
 
 Start with 24 px gutters on small screens and 48–80 px on wide screens. Align headings and captions to shared edges. Use space and image scale to make pieces distinct. Keep controls simple and use Lucide when an icon clarifies an action. Label icon-only controls accessibly.
 
@@ -46,6 +47,9 @@ Start with 24 px gutters on small screens and 48–80 px on wide screens. Align 
 - Use GSAP ScrollTrigger for the material close-up. Reveal a single crop as the visitor scrolls, with a static composition on small screens if scrubbing crowds the layout or harms performance. Prefer bounded transforms and opacity. Use CSS for routine hover and focus states.
 - Use Lenis as the sole smooth-scroll engine when motion is enabled. Integrate it with ScrollTrigger, refresh measurements when font or media sizes settle, and clean up animation instances and listeners on unmount.
 - Under `prefers-reduced-motion: reduce`, bypass Lenis and scroll-linked movement and display the composed end states. Preserve the page content, anchor links, and primary action with JavaScript disabled. Support touch and keyboard wherever a pointer interaction is offered.
+- Keep the shared wordmark and hamburger aligned with the homepage gutters. On open, use the intro charcoal, large Instrument Serif links and a cuff crop on wide screens. Keep the five links and close control visible on small screens.
+- Animate the hamburger strokes outward on hover and draw them back on exit. Use one easing curve for the masked type rollover, silver rule, and arrow so they accelerate and settle together. Keep hit areas fixed and show static feedback with reduced motion.
+- Reverse the GSAP menu timeline on close. For internal menu links, keep the charcoal panel over the route swap and lift it once the destination is ready. Move focus to the destination heading. Keep the homepage intro and native external shop links independent of menu navigation.
 
 ## Review before shipping
 
