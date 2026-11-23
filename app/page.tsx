@@ -11,7 +11,7 @@ export default function Home() {
         Skip to content
       </a>
 
-      <header className="page-frame masthead" id="top">
+      <header className="page-frame masthead" id="top" data-reveal-nav>
         <a href="#top" className="wordmark" aria-label="Silverstoned home">
           silverstoned
         </a>
@@ -24,12 +24,12 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         <section className="page-frame hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <h1 id="hero-title" className="display hero-title" data-hero-heading>
-              <span className="block">Silver</span>{" "}
-              <span className="block">in form.</span>
+            <h1 id="hero-title" className="display hero-title">
+              <span className="block" data-reveal-heading-line>Silver</span>{" "}
+              <span className="block" data-reveal-heading-line>in form.</span>
             </h1>
-            <p>Sculptural silver accessories by Silverstoned.</p>
-            <a className="collection-link" href="#collection">
+            <p data-reveal-description>Sculptural silver accessories by Silverstoned.</p>
+            <a className="collection-link" href="#collection" data-reveal-action>
               Explore the collection
               <ArrowDown aria-hidden="true" size={17} strokeWidth={1.6} />
             </a>
