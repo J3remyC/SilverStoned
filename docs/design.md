@@ -41,7 +41,8 @@ Start with 24 px gutters on small screens and 48–80 px on wide screens. Align 
 
 ## Motion and interaction
 
-- Compose one short GSAP hero entrance around the photograph and supporting type. Keep navigation, the heading, and the primary action visible and operable throughout.
+- On initial homepage entry, introduce SILVER STONED in Instrument Serif against charcoal. Draw a fine rule beneath the wordmark, open the two curtain panels from the center, and overlap the existing hero's text, image, and navigation entrances. Reveal the collection action last. Keep the full sequence around 2.8 seconds.
+- Lock scrolling and tab focus during the reveal. During playback, Tab or Escape completes it immediately. Release the page before starting Lenis, and bypass the entrance for deep links, history restoration, reduced motion, and browsers with JavaScript disabled.
 - Use GSAP ScrollTrigger for the material close-up. Reveal a single crop as the visitor scrolls, with a static composition on small screens if scrubbing crowds the layout or harms performance. Prefer bounded transforms and opacity. Use CSS for routine hover and focus states.
 - Use Lenis as the sole smooth-scroll engine when motion is enabled. Integrate it with ScrollTrigger, refresh measurements when font or media sizes settle, and clean up animation instances and listeners on unmount.
 - Under `prefers-reduced-motion: reduce`, bypass Lenis and scroll-linked movement and display the composed end states. Preserve the page content, anchor links, and primary action with JavaScript disabled. Support touch and keyboard wherever a pointer interaction is offered.
