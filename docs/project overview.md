@@ -6,7 +6,11 @@ Build a responsive landing page for Silverstoned, a silver accessories business.
 
 ## Project status
 
-Workspace inspection on November 23, 2026 found agent tooling, a skills lockfile, and an initialized Git repository with no commits. The frontend is at the planning stage. The workspace has no app source, package manifest, application lockfile, or deployment configuration.
+The Next.js App Router app is initialized at the repository root, with a sample landing page in `app/page.tsx`. Dependencies are managed with npm and locked in `package-lock.json`. Vercel deployment is planned.
+
+Use `npm ci` to install the locked dependencies and `npm run dev` to serve the sample at `http://localhost:3000`. Run `npm run lint`, `npm run typecheck`, and `npm run build` to verify changes.
+
+The sample includes two AI-generated concept images in `public/images/`. `silver-cuff.webp` is the cuff study used in the hero and material crop. `collection-study.webp` shows the cuff and band together. Replace them with approved Silverstoned photography for launch.
 
 ## Proposed technology stack
 
