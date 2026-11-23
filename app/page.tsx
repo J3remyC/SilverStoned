@@ -1,5 +1,6 @@
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { HomeMotion } from "./home-motion";
 import collection from "../public/images/collection-study.webp";
 import cuff from "../public/images/silver-cuff.webp";
@@ -7,32 +8,18 @@ import cuff from "../public/images/silver-cuff.webp";
 export default function Home() {
   return (
     <HomeMotion>
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-
-      <header className="page-frame masthead" id="top" data-reveal-nav>
-        <a href="#top" className="wordmark" aria-label="Silverstoned home">
-          silverstoned
-        </a>
-        <nav className="site-nav" aria-label="Main navigation">
-          <a href="#collection">Collection</a>
-          <a href="#detail">Details</a>
-        </nav>
-      </header>
-
       <main id="main" tabIndex={-1}>
         <section className="page-frame hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <h1 id="hero-title" className="display hero-title">
+            <h1 id="hero-title" className="display hero-title" tabIndex={-1} data-route-heading>
               <span className="block" data-reveal-heading-line>Silver</span>{" "}
               <span className="block" data-reveal-heading-line>in form.</span>
             </h1>
             <p data-reveal-description>Sculptural silver accessories by Silverstoned.</p>
-            <a className="collection-link" href="#collection" data-reveal-action>
+            <Link className="collection-link" href="/collection" data-reveal-action>
               Explore the collection
-              <ArrowDown aria-hidden="true" size={17} strokeWidth={1.6} />
-            </a>
+              <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
+            </Link>
           </div>
 
           <figure>
@@ -95,15 +82,14 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section className="page-frame home-order" aria-labelledby="home-order-title">
+          <h2 id="home-order-title" className="display section-title">Order now</h2>
+          <Link className="collection-link" href="/order">
+            Choose a shop
+            <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
+          </Link>
+        </section>
       </main>
-
-      <footer className="page-frame footer">
-        <span className="wordmark">silverstoned</span>
-        <a className="flex min-h-11 items-center gap-2" href="#top">
-          Back to top
-          <ArrowUp aria-hidden="true" size={16} strokeWidth={1.6} />
-        </a>
-      </footer>
     </HomeMotion>
   );
 }
