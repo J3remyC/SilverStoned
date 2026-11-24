@@ -12,6 +12,7 @@ The first screen should identify Silverstoned, say that it sells silver accessor
 | --- | --- |
 | Black | `#000000` for dark surfaces, type on white, and solid actions on light backgrounds. |
 | White | `#FFFFFF` for light surfaces, type on black, and solid actions on dark backgrounds. |
+| Champagne gold | `#E4C58C` for menu pointer and keyboard emphasis and the thin edge of the page reveal. |
 | Rules and dividers | Use black or white with opacity. Keep low-contrast lines decorative and give essential control boundaries sufficient contrast. |
 | Photography | Use neutral grayscale. Preserve the range between polished highlights and shadow detail so the product reads as silver. |
 | Display type | Instrument Serif, proposed for the hero headline and section titles. Use one expressive treatment across the whole headline. |
@@ -42,14 +43,15 @@ Start with 24 px gutters on small screens and 48–80 px on wide screens. Align 
 
 ## Motion and interaction
 
-- On initial homepage entry, introduce SILVER STONED in Instrument Serif against charcoal. Draw a fine rule beneath the wordmark, open the two curtain panels from the center, and overlap the existing hero's text, image, and navigation entrances. Reveal the collection action last. Keep the full sequence around 2.8 seconds.
+- On initial homepage entry, introduce SILVER STONED in Instrument Serif against charcoal. Draw a fine rule beneath the wordmark. Lift the letters out through a mask in a stagger from the center of the wordmark and retract the rule toward its midpoint. As the last letters clear, open the two curtain panels and bring in the hero text, image, and navigation. Reveal the collection action last. Keep the full sequence around 2.8 seconds.
 - Lock scrolling and tab focus during the reveal. During playback, Tab or Escape completes it immediately. Release the page before starting Lenis, and bypass the entrance for deep links, history restoration, reduced motion, and browsers with JavaScript disabled.
-- Use GSAP ScrollTrigger for the material close-up. Reveal a single crop as the visitor scrolls, with a static composition on small screens if scrubbing crowds the layout or harms performance. Prefer bounded transforms and opacity. Use CSS for routine hover and focus states.
+- Use GSAP ScrollTrigger for the material close-up. Reveal a single crop with a short scrub so it catches up smoothly when scroll speed changes. Use a static composition on small screens if scrubbing crowds the layout or harms performance. Prefer bounded transforms and opacity. Use CSS for routine hover and focus states.
 - Use Lenis as the sole smooth-scroll engine when motion is enabled. Integrate it with ScrollTrigger, refresh measurements when font or media sizes settle, and clean up animation instances and listeners on unmount.
 - Under `prefers-reduced-motion: reduce`, bypass Lenis and scroll-linked movement and display the composed end states. Preserve the page content, anchor links, and primary action with JavaScript disabled. Support touch and keyboard wherever a pointer interaction is offered.
-- Keep the shared wordmark and hamburger aligned with the homepage gutters. On open, use the intro charcoal, large Instrument Serif links and a cuff crop on wide screens. Keep the five links and close control visible on small screens.
-- Animate the hamburger strokes outward on hover and draw them back on exit. Use one easing curve for the masked type rollover, silver rule, and arrow so they accelerate and settle together. Keep hit areas fixed and show static feedback with reduced motion.
-- Reverse the GSAP menu timeline on close. For internal menu links, keep the charcoal panel over the route swap and lift it once the destination is ready. Move focus to the destination heading. Keep the homepage intro and native external shop links independent of menu navigation.
+- Align the shared wordmark and icon-only navigation controls to the homepage gutters. Give the open and close icons accessible names. Center the five large Instrument Serif links on charcoal and highlight the current page with brighter text and `aria-current`. Allow the menu to scroll on short screens.
+- Animate the hamburger strokes outward on hover and draw them back on exit. As the pointer approaches the links, gradually tint and scale the labels in proportion to distance. Use the full champagne-gold emphasis on keyboard focus. Keep the link hit areas fixed and use static color feedback with reduced motion.
+- On menu open, slide five charcoal bands horizontally from the left with a stagger. Once they cover the viewport, slide the split letters through their masks from left to right. Reverse the sequence on close. Ease these transitions and the homepage curtain and circular route reveal gently at both ends.
+- Use a single transition for menu selections, the wordmark, and links between site pages. Slide a charcoal cover in from the left on a page link, or hand off from the charcoal menu as its labels clear. Prefetch during the cover and swap pages once it fills the viewport. On slower requests, show a loading message. When the destination renders, open a circular aperture with a fine champagne edge. Center it on wide, image-led pages and bring it toward the heading on compact or text-only layouts. Reveal the heading word by word and bring in the image and primary action during the opening. Release the cover on Escape or a stalled request, and hand focus to the destination heading. Honor reduced motion and native browser history and anchor navigation.
 
 ## Review before shipping
 

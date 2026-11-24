@@ -16,16 +16,16 @@ export function HomeMotion({ children }: { children: ReactNode }) {
     media.add("(min-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         "[data-detail-image]",
-        { scale: 1.08, yPercent: 2 },
+        { scale: 1.08, yPercent: 1.75 },
         {
-          scale: 1.16,
-          yPercent: -2,
+          scale: 1.14,
+          yPercent: -1.75,
           ease: "none",
           scrollTrigger: {
             trigger: "[data-detail-frame]",
             start: "top bottom",
             end: "clamp(bottom top)",
-            scrub: true,
+            scrub: 0.18,
           },
         },
       );

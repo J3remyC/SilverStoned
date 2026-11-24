@@ -273,3 +273,132 @@ Entries are ordered oldest to newest. Append one entry per project prompt using 
 **Verification:** Checked the current branch, the local navigation commit, and the configured push URL. Application checks passed before the navigation commit.
 
 **Follow-up:** None.
+
+## 11/24/2026 - Revamp the menu and page transitions
+
+**Title:** Revamp the menu and page transitions
+
+**Request:** Refresh the shared menu with split text and clip-path animation, and use React Router for seamless page changes.
+
+**Files affected:**
+
+- `app/site-navigation.tsx` and `app/globals.css` — redesigned the menu with labeled controls, editorial type, a tall cuff crop, and an active page marker. Added a GSAP SplitText entrance and a diagonal clip-path transition after menu selections.
+- `app/site-router.tsx`, `app/layout.tsx`, `app/page.tsx`, `app/about/page.tsx`, `app/collection/page.tsx`, `app/order/page.tsx`, and `app/contact/page.tsx` — connected internal React Router links to the Next.js App Router and identified when destination content is ready for its reveal.
+- `package.json` and `package-lock.json` — added and locked the React Router dependency.
+- `docs/design.md`, `docs/project overview.md`, and `docs/logs/logs.md` — documented the menu design, routing integration, and this request.
+
+**Outcome:** Rebuilt the menu using the existing cuff concept image. Menu selections transition to prerendered pages without a full reload. The wipe reveals the destination heading word by word, then hands off focus. Reduced-motion and no-JavaScript navigation remain usable.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and direct HTTP checks for all five pages and their titles passed. Reviewed desktop and mobile Chrome captures. Chrome verified animated navigation to all five pages, Back and Forward with scroll restoration, keyboard focus, rapid toggles, touch at three sizes, reduced motion, no-JavaScript links, and delayed or stalled route recovery.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Refine menu transitions and split-text hover
+
+**Title:** Refine menu transitions and split-text hover
+
+**Request:** Improve the animation between menu destinations and add split-text hover to the navigation links.
+
+**Files affected:**
+
+- `app/site-navigation.tsx` and `app/globals.css` — kept the selected row visible as the other rows recede, added a narrow silver edge to the directional clip-path wipe, and timed the heading, image, caption, and action to the reveal. Grouped split letters into words to preserve spacing.
+- `app/use-navigation-hover.ts` — staggered the individual letters on hover and keyboard focus and reversed the rollover from its current position.
+- `app/loading.tsx` — removed the route fallback that could leave the prerendered page hidden until JavaScript ran.
+- `docs/design.md` and `docs/logs/logs.md` — documented the motion rules and this request.
+
+**Outcome:** Page transitions follow the menu order in either direction and move focus to the new heading. Link labels roll letter by letter with fixed hit areas and static feedback in reduced motion.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and visible prerendered HTML checks for all five routes passed. Chrome verified both wipe directions, hover reversal, keyboard focus, mobile touch at three sizes, browser history, reduced motion, no-JavaScript links, and delayed or stalled route recovery. The Impeccable recorder disconnected, so the motion review used frame captures from Chrome.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Reveal menu destinations with a centered circle
+
+**Title:** Reveal menu destinations with a centered circle
+
+**Request:** Animate the links out when a menu destination is selected, then use a circular clip-path to reveal the selected page.
+
+**Files affected:**
+
+- `app/site-navigation.tsx` — starts the staggered link exit on selection and shrinks the charcoal panel to the viewport center once the links have cleared and the destination is ready.
+- `app/globals.css` — centers the loading message and delays its appearance for slower requests.
+- `docs/design.md` and `docs/logs/logs.md` — documented the circular transition and this request.
+
+**Outcome:** The charcoal panel covers the route change while the links animate out. The panel then contracts into a circle and reveals the selected page. Focus moves to the destination heading.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and direct HTTP checks for all five pages passed. Reviewed desktop and mobile Chrome frames. Chrome confirmed the order of the link exit and circle on all five routes, touch at three viewport sizes, keyboard focus, browser history, no-JavaScript links, and reduced motion including a preference change during the exit. Simulated delayed requests, stalled requests, and Escape during a pending request.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Animate the homepage wordmark out
+
+**Title:** Animate the homepage wordmark out
+
+**Request:** Improve the homepage reveal by animating the logo out as split text.
+
+**Files affected:**
+
+- `app/website-reveal.ts` — staggered the exit of the existing letter spans from the center outward, retracted the rule, and retimed the curtain and hero entrance.
+- `app/globals.css` — clipped the rising letters while preserving the wordmark's resting position.
+- `docs/design.md` and `docs/logs/logs.md` — documented the revised reveal and this request.
+
+**Outcome:** The SILVER STONED wordmark rises out letter by letter as the underline retracts. The curtain opens into the hero as the final letters clear.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and the prerendered homepage response passed. Reviewed desktop and mobile Chrome frames. Chrome measured a 2.8-second reveal with no recorded layout shift and verified the letter order, mask clearance, keyboard skips, reduced motion, deep links, browser history, no-JavaScript navigation, blocked resources, and reveal listener cleanup.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Smooth the site motion
+
+**Title:** Smooth the site motion
+
+**Request:** Make the homepage reveal, navigation, hover effects, and scrolling feel smoother.
+
+**Files affected:**
+
+- `app/website-reveal.ts` and `app/site-navigation.tsx` — softened the easing and improved the overlap of the logo exit, curtains, menu, and circular page reveal. Replaced the second menu image mask animation with a transform and fade inside the image frame.
+- `app/use-navigation-hover.ts` and `app/globals.css` — shortened partial hover reversals, coordinated the nav letters with their arrow and rule, and eased the primary action arrow and menu press feedback.
+- `app/site-motion.ts` and `app/home-motion.tsx` — tuned Lenis wheel easing and added a short ScrollTrigger scrub to the product close-up.
+- `docs/design.md` and `docs/logs/logs.md` — documented the revised motion and this request.
+
+**Outcome:** Motion starts and settles more gently across the intro and route changes. Hover reversals respond to how far the letters have traveled. The desktop material crop catches up over a short interval after a scroll change.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and HTTP checks for all five routes passed. Reviewed desktop and mobile Chrome frames. Verified the 2.8-second intro, circular transitions, quick hover reversal, progressive wheel scroll and product scrub, touch, keyboard focus, reduced motion, no-JavaScript navigation, browser history, and slow-route recovery.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Rebuild the menu entrance and hover
+
+**Title:** Rebuild the menu entrance and hover
+
+**Request:** Open the hamburger menu with a staggered horizontal overlay, then reveal the links with split text. Change their color and enlarge them slightly on hover.
+
+**Files affected:**
+
+- `app/site-navigation.tsx` and `app/globals.css` — added five horizontal charcoal bands, a separate content reveal, and a scrollable menu body.
+- `app/use-navigation-hover.ts` and `app/globals.css` — shifted the link labels to silver and scaled the text by 3.5% during hover and keyboard focus.
+- `docs/design.md` and `docs/logs/logs.md` — documented the revised menu and this request.
+
+**Outcome:** The bands slide in from the left with a stagger. Once they cover the viewport, the link letters rise into view and the desktop cuff image appears. Hover applies color and scale to the label, and the row's hit area stays fixed.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and HTTP checks for all five routes passed. Reviewed desktop and mobile Chrome frames. Verified band and text timing, hover color and scale, rapid reversal, keyboard focus, touch at three sizes, short-screen scrolling, reduced motion, no-JavaScript links, browser history, and delayed or stalled route recovery.
+
+**Follow-up:** None.
+
+## 11/24/2026 - Center the menu and add proximity emphasis
+
+**Title:** Center the menu and add proximity emphasis
+
+**Request:** Use icon-only menu controls, center the links, remove the photograph and link decorations, align the split text with the band direction, and explore a color for proximity hover.
+
+**Files affected:**
+
+- `app/site-navigation.tsx` and `app/globals.css` — centered the links on charcoal, removed visual labels, the overlay image, arrows, and dividers, and aligned the masked glyph reveal with the horizontal bands.
+- `app/use-navigation-hover.ts` and `app/globals.css` — added distance-based scaling and color, keyboard emphasis, and static reduced-motion feedback.
+- `docs/design.md` and `docs/logs/logs.md` — recorded the menu layout, accent, and interaction.
+
+**Outcome:** Compared champagne gold, ice blue, and dusty rose. Chose champagne gold (`#E4C58C`) for a warm accent against charcoal. The nearest label can grow by 7.5%, with a weaker response on nearby labels.
+
+**Verification:** Lint, TypeScript, the production build, Git whitespace, and HTTP checks for all five routes passed. Chrome verified the centered layout, masked entrance and exit, proximity gradient, fixed link bounds, keyboard focus, touch at three sizes, reduced motion, no-JavaScript navigation, browser history, and slow-route recovery. The gold accent measured 11.3:1 against charcoal. The Impeccable recorder disconnected, so the motion review used direct Chrome frames and state samples.
+
+**Follow-up:** None.

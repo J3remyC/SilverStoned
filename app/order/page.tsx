@@ -15,7 +15,7 @@ const storefronts = [
 
 export default function OrderPage() {
   return (
-    <main id="main" tabIndex={-1} className="page-frame route-page">
+    <main id="main" tabIndex={-1} className="page-frame route-page" data-route="/order">
       <h1 className="display section-title" tabIndex={-1} data-route-heading>Order Now</h1>
       {storefronts.length ? (
         <>

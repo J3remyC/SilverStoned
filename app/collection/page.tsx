@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "../site-router";
 import collection from "../../public/images/collection-study.webp";
 import { pageMetadata } from "../page-metadata";
 
@@ -8,13 +8,13 @@ export const metadata = pageMetadata("Collection", "Explore Silver Stoned’s cu
 
 export default function CollectionPage() {
   return (
-    <main id="main" tabIndex={-1} className="page-frame route-page route-split">
+    <main id="main" tabIndex={-1} className="page-frame route-page route-split" data-route="/collection">
       <div>
         <h1 className="display section-title" tabIndex={-1} data-route-heading>Collection</h1>
         <p>An open cuff and a rounded band. Two studies in the way light moves across silver.</p>
-        <Link href="/order" className="collection-link">
+        <SiteLink to="/order" className="collection-link">
           Order Now <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
-        </Link>
+        </SiteLink>
       </div>
       <figure>
         <div className="route-image">

@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "./site-router";
 import { HomeMotion } from "./home-motion";
 import collection from "../public/images/collection-study.webp";
 import cuff from "../public/images/silver-cuff.webp";
@@ -8,7 +8,7 @@ import cuff from "../public/images/silver-cuff.webp";
 export default function Home() {
   return (
     <HomeMotion>
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} data-route="/">
         <section className="page-frame hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <h1 id="hero-title" className="display hero-title" tabIndex={-1} data-route-heading>
@@ -16,10 +16,10 @@ export default function Home() {
               <span className="block" data-reveal-heading-line>in form.</span>
             </h1>
             <p data-reveal-description>Sculptural silver accessories by Silverstoned.</p>
-            <Link className="collection-link" href="/collection" data-reveal-action>
+            <SiteLink className="collection-link" to="/collection" data-reveal-action>
               Explore the collection
               <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
-            </Link>
+            </SiteLink>
           </div>
 
           <figure>
@@ -84,10 +84,10 @@ export default function Home() {
         </section>
         <section className="page-frame home-order" aria-labelledby="home-order-title">
           <h2 id="home-order-title" className="display section-title">Order now</h2>
-          <Link className="collection-link" href="/order">
+          <SiteLink className="collection-link" to="/order">
             Choose a shop
             <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
-          </Link>
+          </SiteLink>
         </section>
       </main>
     </HomeMotion>

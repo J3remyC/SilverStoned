@@ -15,8 +15,13 @@ export function useSiteMotion(
 ) {
   const smoothScroll = useRef<Lenis | null>(null);
   const startReveal = useRef<(() => void) | null>(null);
+  const scrollLocks = useRef(new Set<"menu" | "route">());
 
-  const setMenuLock = useCallback((locked: boolean) => {
+  const setScrollLock = useCallback((owner: "menu" | "route", active: boolean) => {
+    if (active) scrollLocks.current.add(owner);
+    else scrollLocks.current.delete(owner);
+
+    const locked = scrollLocks.current.size !== 0;
     const root = document.documentElement;
     if (locked && !root.hasAttribute("data-menu-open")) {
       const gutter = window.innerWidth - root.getBoundingClientRect().width;
@@ -49,7 +54,7 @@ export function useSiteMotion(
 
     const enableSmoothScroll = () => {
       media.add("(pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
-        const lenis = new Lenis({ anchors: true });
+        const lenis = new Lenis({ anchors: true, lerp: 0.085 });
         const tick = (seconds: number) => lenis.raf(seconds * 1000);
         smoothScroll.current = lenis;
         if (root.hasAttribute("data-menu-open")) lenis.stop();
@@ -121,7 +126,8 @@ export function useSiteMotion(
       }
       document.fonts.removeEventListener("loadingdone", refresh);
       media.revert();
-      setMenuLock(false);
+      setScrollLock("menu", false);
+      setScrollLock("route", false);
     };
   }, { scope: content });
 
@@ -131,5 +137,5 @@ export function useSiteMotion(
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  return setMenuLock;
+  return setScrollLock;
 }

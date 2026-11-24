@@ -16,10 +16,11 @@ The sample includes two AI-generated concept images in `public/images/`. `silver
 
 | Technology | Purpose | Why use it? |
 | --- | --- | --- |
-| Next.js | Web framework | Supports routing, page metadata for SEO, and image optimization. The App Router is the proposed starting point. |
+| Next.js | Web framework | The App Router serves prerendered pages, page metadata, and optimized images. |
+| React Router | Internal navigation | Resolves internal links and marks the active menu item. Its navigator uses the Next.js App Router to load server-rendered pages and maintain browser history. |
 | TypeScript | Language | Gives components and product content a typed structure that is easier to maintain. |
 | Tailwind CSS | Styling | Supports responsive layouts and consistent use of the design tokens. |
-| GSAP | Animation | Sequences the hero entrance and other purposeful transitions. |
+| GSAP | Animation | Sequences the hero entrance, SplitText reveals, and circular transitions between pages. |
 | GSAP ScrollTrigger | Scroll effects | Connects scroll progress to the product-detail story. |
 | Lenis | Smooth scrolling | Provides optional smooth scrolling coordinated with ScrollTrigger while retaining native scroll for reduced motion. |
 | Lucide | Iconography | Supplies a consistent set of simple interface icons. |

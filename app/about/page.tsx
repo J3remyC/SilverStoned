@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "../site-router";
 import cuff from "../../public/images/silver-cuff.webp";
 import { pageMetadata } from "../page-metadata";
 
@@ -8,16 +8,16 @@ export const metadata = pageMetadata("About", "About Silver Stoned and its studi
 
 export default function AboutPage() {
   return (
-    <main id="main" tabIndex={-1} className="page-frame route-page route-split">
+    <main id="main" tabIndex={-1} className="page-frame route-page route-split" data-route="/about">
       <div>
         <h1 className="display section-title" tabIndex={-1} data-route-heading>About Silver Stoned</h1>
         <p>
           Silver Stoned explores the way silver holds its shape and catches the light.
           An open curve, a rounded edge, and a polished surface give each piece its character.
         </p>
-        <Link href="/collection" className="collection-link">
+        <SiteLink to="/collection" className="collection-link">
           Explore the collection <ArrowRight aria-hidden="true" size={17} strokeWidth={1.6} />
-        </Link>
+        </SiteLink>
       </div>
       <figure>
         <div className="route-image">
